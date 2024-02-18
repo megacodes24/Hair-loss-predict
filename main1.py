@@ -44,5 +44,8 @@ elif (page == "Data Info"):
 else:
     Tabs[page].app()
 
-# Debugging: Print the flags.writeable property of y after passing it to predict
-print("After predict - y.flags.writeable:", y.flags.writeable)
+# Debugging: Print the flags.writeable property of y before passing it to predict
+if y is not None and hasattr(y, 'flags'):
+    print("Before predict - y.flags.writeable:", y.flags.writeable)
+else:
+    print("Before predict - y is None or does not have 'flags' attribute")
