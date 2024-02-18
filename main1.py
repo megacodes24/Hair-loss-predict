@@ -34,7 +34,10 @@ page = st.sidebar.radio("Pages", list(Tabs.keys()))
 df, X, y = load_data()
 
 # Debugging: Print the flags.writeable property of y before passing it to predict
-print("Before predict - y.flags.writeable:", y.flags.writeable)
+if hasattr(y, 'flags') and hasattr(y.flags, 'writeable'):
+    print("Before predict - y.flags.writeable:", y.flags.writeable)
+else:
+    print("Before predict - y does not have 'flags' attribute")
 
 # Call the app function of selected page to run
 if page in ["Prediction"]:
@@ -45,5 +48,7 @@ else:
     Tabs[page].app()
 
 # Debugging: Print the flags.writeable property of y after passing it to predict
-print("After predict - y.flags.writeable:", y.flags.writeable)
-
+if hasattr(y, 'flags') and hasattr(y.flags, 'writeable'):
+    print("After predict - y.flags.writeable:", y.flags.writeable)
+else:
+    print("After predict - y does not have 'flags' attribute")
